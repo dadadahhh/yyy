@@ -2,8 +2,6 @@ import json
 import time
 from flask import Flask, render_template
 from flask import jsonify, request, Response
-# import redis
-import requests
 from collections import defaultdict
 import heapq
 
