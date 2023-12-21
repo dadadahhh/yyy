@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Closest Cities Statistics</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Closest Cities Statistics</h1>
+    <label for="cityInput">Enter City Name:</label>
+    <input type="text" id="cityInput">
+    <button onclick="fetchCityStats()">Get City Stats</button>
+    <div id="cityStats"></div>
+
+    <script>
+        function fetchCityStats() {
+            var cityName = document.getElementById('cityInput').value;
+            var url = '/stat/closest_cities?city="' + cityName + '"&page=0&page_size=50';
+
+            // 发起GET请求以获取数据
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(data) {
+                    // 处理返回的JSON数据
+                    displayCityStats(data);
+                }
+            });
+        }
+
+        // 显示城市统计信息
+        function displayCityStats(data) {
+            // 创建一个HTML字符串来展示数据
+            var html = '<h2>Closest Cities to ' + data.city + '</h2>';
+            html += '<ul>';
+            for (var i = 0; i < data.closestCities.length; i++) {
+                html += '<li>' + data.closestCities[i].name + ' - Distance: ' + data.closestCities[i].distance + '</li>';
+            }
+            html += '</ul>';
+            html += '<p>Response time: ' + data.responseTime + ' ms</p>';
+
+            // 在页面上显示数据
+            $('#cityStats').html(html);
+        }
+    </script>
+</body>
+</html>
