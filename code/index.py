@@ -60,9 +60,9 @@ def get_reviews_data():
 
 
 
-cities_data = get_cities_data()
-reviews_data = get_reviews_data()
-print(reviews_data[0:10])
+# cities_data = get_cities_data()
+# reviews_data = get_reviews_data()
+# print(reviews_data[0:10])
 
 @app.route('/stat', methods=['GET'])
 def stat():
@@ -71,6 +71,7 @@ def stat():
 
 @app.route('/closest_cities', methods=['GET'])
 def closest_cities():
+    cities_data = get_cities_data()
     start_time = time.time()
     city_name = request.args.get('city')
     page_size = int(request.args.get('page_size', 50))
@@ -137,6 +138,7 @@ print(stopwords)
 # Endpoint for Q11
 @app.route('/knn_reviews', methods=['GET'])
 def knn_reviews():
+    reviews_data = get_reviews_data()
     start_time = time.time()
 
     classes = int(request.args.get('classes', 3))
