@@ -211,4 +211,4 @@ def knn_algorithm(reviews_data, k, classes, words, stopwords):
     return result_clusters
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9000, debug=True)
+    app.run()
